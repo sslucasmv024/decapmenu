@@ -1,17 +1,12 @@
 backend:
-  name: test-repo
+  name: git-gateway
+  branch: main # Asegurate de que sea tu rama principal
 
 locale: es
 
-# --- Lo que faltaba para que no de error ---
+# Carpetas donde se guardarán las imágenes
 media_folder: "public/uploads"
 public_folder: "/uploads"
-
-media_library:
-  name: "uploadcare" # Aunque no lo uses, el schema pide definirlo
-  config:
-    publicKey: "demopublickey" 
-# ------------------------------------------
 
 collections:
   - name: "prueba"
