@@ -1,0 +1,46 @@
+---
+const { 
+  nombre_plato, 
+  descripcion, 
+  precio, 
+  imagen_plato, 
+  Graduacion_alcoholica, 
+  colorHex, 
+  urlBase 
+} = Astro.props;
+
+const formatter = new Intl.NumberFormat('es-AR');
+
+// Reutilizamos la lógica de negritas
+const procesarNegritas = (texto) => {
+  if (!texto) return "";
+  return texto.replace(/\*\*(.*?)\*\*/g, '<b class="text-white font-black tracking-tight">$1</b>');
+};
+
+const urlImagen = imagen_plato 
+  ? `${urlBase}/assets/${imagen_plato}?width=120&height=120&fit=cover` 
+  : null;
+---
+
+<div class="bg-slate-900/60 rounded-3xl border border-white/5 p-4 flex items-center justify-between gap-6 hover:bg-slate-900/80 transition-all group">
+    <div class="flex items-center gap-6 flex-1 min-w-0">
+        {urlImagen && (
+            <img src={urlImagen} class="w-20 h-20 rounded-2xl object-cover flex-shrink-0 shadow-md border border-white/10 group-hover:scale-105 transition-transform" alt={nombre_plato} />
+        )}
+        <div class="min-w-0 flex-1">
+            <h4 class="font-black text-white text-lg uppercase tracking-tight truncate">{nombre_plato}</h4>
+            <p class="text-slate-400 text-sm line-clamp-2 mt-1 leading-snug" set:html={procesarNegritas(descripcion)} />
+            
+            {Graduacion_alcoholica && (
+                <div class="flex gap-2 mt-2">
+                    <span class="text-[10px] font-black px-2 py-0.5 rounded uppercase" style={`background-color: ${colorHex}20; color: ${colorHex};`}>
+                        {Graduacion_alcoholica}% ABV
+                    </span>
+                </div>
+            )}
+        </div>
+    </div>
+    <div class="font-black text-white text-right border-l border-white/10 pl-6 min-w-[100px]">
+        <span class="text-xl">${formatter.format(precio || 0)}</span>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+
+// Recibimos el título de la página como prop
+const { title = "Valhalla Crew" } = Astro.props;
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+		<style is:global>
+			/* Estilos que querés que afecten a TODO el sitio */
+			details[open] .arrow-icon { transform: rotate(180deg); }
+			details summary::-webkit-details-marker { display: none; }
+			
+			/* Scrollbar personalizada estilo dark */
+			::-webkit-scrollbar { width: 8px; }
+			::-webkit-scrollbar-track { background: #0f172a; }
+			::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+		</style>
+	</head>
+	<body class="bg-[#0f172a] text-slate-200 font-sans antialiased selection:bg-amber-500/30">
+		
+		<main class="max-w-5xl mx-auto p-4 lg:p-10">
+			
+			{/* El Header también podría ser un componente aparte, pero acá queda bien */}
+			<Header>
+			</Header>
+
+			{/* AQUÍ SE RENDERIZA EL CONTENIDO DE CADA PÁGINA */}
+			<slot />
+
+		</main>
+
+		<footer class="text-center py-16 text-slate-700 text-[10px] font-black uppercase tracking-[0.5em]">
+			Valhalla Crew • {new Date().getFullYear()}
+		</footer>
+
+	</body>
+</html>

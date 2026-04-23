@@ -1,0 +1,22 @@
+---
+import PromoCard from '../PromoCard.astro';
+
+const { promos = [], urlBase } = Astro.props;
+---
+
+{promos.length > 0 && (
+  <section class="mb-16">
+    {/* Encabezado de la sección */}
+    <h2 class="text-xs font-black text-amber-500 uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+      <span class="bg-amber-500/10 px-3 py-1 rounded-md">Ofertas Especiales</span>
+      <div class="h-px flex-1 bg-amber-500/20"></div>
+    </h2>
+
+    {/* Grilla de Cards */}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {promos.map((promo) => (
+        <PromoCard {...promo} urlBase={urlBase} />
+      ))}
+    </div>
+  </section>
+)}

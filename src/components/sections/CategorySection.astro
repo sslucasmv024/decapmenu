@@ -1,0 +1,32 @@
+---
+const { nombre, colorHex, cantidad } = Astro.props;
+---
+
+<details 
+  class="group rounded-[2.5rem] border overflow-hidden transition-all duration-300 shadow-xl mb-6"
+  style={`background-color: ${colorHex}10; border-color: ${colorHex}25;`}
+>
+    <summary class="flex items-center justify-between p-7 cursor-pointer list-none hover:bg-white/5 transition-colors">
+        <div class="flex items-center gap-5">
+            <h2 class="text-2xl font-black uppercase tracking-tight text-white italic">
+                {nombre}
+            </h2>
+            <span 
+                class="text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest"
+                style={`background-color: ${colorHex}25; color: ${colorHex};`}
+            >
+                {cantidad} Items
+            </span>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" 
+            class="arrow-icon transition-transform duration-300 opacity-80"
+            style={`color: ${colorHex};`}>
+            <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+    </summary>
+
+    <div class="p-5 pt-0 grid gap-4 mt-2 border-t border-white/5">
+        {/* Aquí es donde Astro inyectará los platos */}
+        <slot />
+    </div>
+</details>
